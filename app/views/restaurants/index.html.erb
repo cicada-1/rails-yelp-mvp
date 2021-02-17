@@ -1,27 +1,29 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <h1>Restaurants</h1>
+  <div class="index-heading">
+    <h1>Restaurants</h1>
+    <%= link_to new_restaurant_path, class: 'btn btn-primary' do %>
+      <i class="fas fa-plus"></i> Add Restaurant
+    <% end %>
+  </div>
 
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>Name</th>
-        <th>Category</th>
+        <th>Cuisine</th>
       </tr>
     </thead>
 
     <tbody>
       <% @restaurants.each do |restaurant| %>
         <tr>
-          <td><%= link_to restaurant.name, restaurant %></td>
+          <td><%= link_to restaurant.name, restaurant, class: 'table-column-one' %></td>
           <td><%= restaurant.category %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <br>
-
-  <%= link_to 'New Restaurant', new_restaurant_path %>
 </div>

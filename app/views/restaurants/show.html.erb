@@ -1,6 +1,8 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
+  <h1><%= @restaurant.name %></h1>
+
   <p>
     <strong>Name:</strong>
     <%= @restaurant.name %>
@@ -21,18 +23,24 @@
     <%= @restaurant.category %>
   </p>
 
-  <%= link_to 'Back', restaurants_path %> |
-  <%= link_to 'Leave a Review', new_restaurant_review_path(@restaurant) %>
+  <%= link_to restaurants_path, class: 'btn btn-primary' do %>
+    <i class="fas fa-undo-alt"></i> Back
+  <% end %>
   <br>
   <br>
-  <h2>Reviews</h2>
+  <div class="review-heading">
+    <h2>Reviews</h2>
+    <%= link_to new_restaurant_review_path(@restaurant), class: 'btn btn-primary' do %>
+      <i class="fas fa-plus"></i> Leave a Review
+    <% end %>
+  </div>
 
   <ul>
     
-    <% @restaurant.reviews.each do |review| %>
-      <li>
-        <%= review.content %>
-        <%= review.rating %>/5
+    <% @restaurant.reviews.first(5).each do |review| %>
+      <li class='list-item-review'>
+        <p><%= review.content %></p>
+        <p><%= "<i class='fas fa-star'></i>".html_safe * review.rating %><%= "<i class='far fa-star'></i>".html_safe * (5 - review.rating) %></p>
       </li>
     <% end %>
     
